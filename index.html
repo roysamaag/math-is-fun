@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Is Fun - Practice Your Math Skills</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧮 Math Is Fun</h1>
+            <p class="subtitle">Test your math skills in 4 minutes!</p>
+        </header>
+
+        <!-- User Login Section -->
+        <div class="user-section" id="userSection">
+            <div class="user-info" id="userInfo" style="display: none;">
+                <span>Welcome, <strong id="currentUsername"></strong>!</span>
+                <button id="logoutBtn" class="btn-small">Logout</button>
+            </div>
+            <div class="login-form" id="loginForm">
+                <input 
+                    type="text" 
+                    id="usernameInput" 
+                    placeholder="Enter your username"
+                    maxlength="20"
+                >
+                <button id="loginBtn" class="btn-primary">Login / Register</button>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="game">Game</button>
+            <button class="tab-btn" data-tab="leaderboard">Leaderboard</button>
+            <button class="tab-btn" data-tab="stats">My Stats</button>
+        </div>
+
+        <!-- Game Panel -->
+        <div class="game-panel tab-content active" id="gameTab">
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-label">Time</span>
+                    <span class="stat-value" id="timer">4:00</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Score</span>
+                    <span class="stat-value" id="score">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Correct</span>
+                    <span class="stat-value" id="correct">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Wrong</span>
+                    <span class="stat-value" id="wrong">0</span>
+                </div>
+            </div>
+
+            <div class="problem-container" id="problemContainer">
+                <div class="problem-display" id="problemDisplay">
+                    <p class="instruction">Click "Start Game" to begin!</p>
+                </div>
+                <div class="answer-section">
+                    <input 
+                        type="number" 
+                        id="answerInput" 
+                        placeholder="Enter your answer"
+                        disabled
+                        autocomplete="off"
+                    >
+                    <button id="submitBtn" disabled>Submit</button>
+                </div>
+                <div class="feedback" id="feedback"></div>
+            </div>
+
+            <div class="controls">
+                <button id="startBtn" class="btn-primary">Start Game</button>
+                <button id="newProblemBtn" class="btn-secondary" disabled>New Problem</button>
+            </div>
+
+            <div class="operation-selector">
+                <label>Select Operations:</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="addCheck" checked>
+                        <span>Addition (+)</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="subCheck" checked>
+                        <span>Subtraction (-)</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="mulCheck" checked>
+                        <span>Multiplication (×)</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="divCheck" checked>
+                        <span>Division (÷)</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="game-over" id="gameOver">
+                <h2>Time's Up! ⏰</h2>
+                <div class="final-stats">
+                    <p><strong>Final Score:</strong> <span id="finalScore">0</span></p>
+                    <p><strong>Correct Answers:</strong> <span id="finalCorrect">0</span></p>
+                    <p><strong>Wrong Answers:</strong> <span id="finalWrong">0</span></p>
+                    <p><strong>Total Problems:</strong> <span id="totalProblems">0</span></p>
+                    <p id="rankDisplay" style="display: none;"><strong>Your Rank:</strong> <span id="userRank">-</span></p>
+                </div>
+                <button id="restartBtn" class="btn-primary">Play Again</button>
+            </div>
+        </div>
+
+        <!-- Leaderboard Panel -->
+        <div class="leaderboard-panel tab-content" id="leaderboardTab">
+            <div class="leaderboard-controls">
+                <label>Timeframe:</label>
+                <select id="timeframeSelect">
+                    <option value="all">All Time</option>
+                    <option value="month">Last Month</option>
+                    <option value="week">Last Week</option>
+                    <option value="today">Today</option>
+                </select>
+                <button id="refreshLeaderboard" class="btn-secondary">Refresh</button>
+            </div>
+            <div class="leaderboard-list" id="leaderboardList">
+                <p class="loading">Loading leaderboard...</p>
+            </div>
+        </div>
+
+        <!-- Statistics Panel -->
+        <div class="stats-panel tab-content" id="statsTab">
+            <div id="statsContent">
+                <p class="instruction">Please login to view your statistics.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
