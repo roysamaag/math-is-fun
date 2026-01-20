@@ -1,0 +1,11 @@
+Thank you for installing mathisfun.
+
+To see how to access the service:
+
+1. Get the service name:
+   kubectl get svc -l app.kubernetes.io/name={{ include "mathisfun.name" . }} -n {{ .Release.Namespace }}
+
+2. If you installed with `helm install`, run:
+   kubectl port-forward svc/{{ include "mathisfun.fullname" . }} 8080:{{ .Values.service.port }} -n {{ .Release.Namespace }}
+
+Then open http://localhost:8080

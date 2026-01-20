@@ -1,0 +1,52 @@
+replicaCount: 1
+
+image:
+  # Replace with your registry/repository, e.g. ghcr.io/your-org/mathisfun
+  repository: acrmathisfun.azurecr.io/mathisfun
+  tag: v5
+  pullPolicy: IfNotPresent
+
+service:
+  type: LoadBalancer
+  port: 80
+  targetPort: 3000
+
+# ingress:
+#   enabled: false
+#   # Optional: set an ingress class name, e.g. "nginx" or a cloud provider class
+#   # className: "nginx"
+#   # Optional annotations map for the ingress resource
+#   annotations: {}
+#   # TLS entries: list of { hosts: ["example.com"], secretName: "tls-secret" }
+#   tls: []
+#   hosts:
+#     - host: mathisfun
+#       paths:
+#       - path: /
+#         backend:
+#           serviceName: mathisfun
+#           servicePort: 3000
+
+# Modern
+ingress:
+  enabled: false
+  className: nginx
+  annotations: {}
+  hosts:
+   - host: mathisfun.centralus.cloudapp.azure.com
+     paths:
+      - path: /
+        pathType: Prefix
+        backend:
+         service:
+          name: mathisfun-mathisfun
+          port:
+           number: 3000
+tls: []
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

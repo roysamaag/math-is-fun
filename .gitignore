@@ -3,4 +3,6 @@ mathgame.db
 .DS_Store
 *.log
 .env
+data/
+*.tar
 

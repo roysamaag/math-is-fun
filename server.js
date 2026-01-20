@@ -12,18 +12,20 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static('.'));
 
-// Initialize database
-const db = new sqlite3.Database('./mathgame.db', (err) => {
+// Initialize database - use environment variable or default path
+const DB_PATH = process.env.DB_PATH || './mathgame.db';
+const db = new sqlite3.Database(DB_PATH, (err) => {
     if (err) {
         console.error('Error opening database:', err.message);
     } else {
-        console.log('Connected to SQLite database');
+        console.log('Connected to SQLite database1');
         initializeDatabase();
     }
 });
 
 // Initialize database tables
 function initializeDatabase() {
+    console.log('Initializing DB');
     db.serialize(() => {
         // Users table
         db.run(`CREATE TABLE IF NOT EXISTS users (
@@ -31,6 +33,7 @@ function initializeDatabase() {
             username TEXT UNIQUE NOT NULL,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )`);
+         console.log('Created users table');
 
         // Games table - stores each game session
         db.run(`CREATE TABLE IF NOT EXISTS games (
@@ -44,6 +47,7 @@ function initializeDatabase() {
             played_at DATETIME DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (user_id) REFERENCES users(id)
         )`);
+        console.log('Created stores table');
 
         // Problem attempts table - tracks individual problem performance
         db.run(`CREATE TABLE IF NOT EXISTS problem_attempts (
@@ -288,7 +292,7 @@ app.get('/api/trends', (req, res) => {
 });
 
 // Start server
-app.listen(PORT, () => {
+app.listen(PORT,'0.0.0.0', () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
 
